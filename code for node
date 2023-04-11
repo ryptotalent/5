@@ -1,0 +1,34 @@
+wget -q -O sui_testnet.sh https://raw.githubusercontent.com/Contribution-DAO/sui-node-setup/main/sui_testnet.sh && chmod +x sui_testnet.sh && sudo /bin/bash sui_testnet.sh
+
+service suid status
+
+curl -s -X POST http://127.0.0.1:9000 -H 'Content-Type: application/json' -d '{ "jsonrpc":"2.0", "method":"rpc.discover","id":1}' | jq .result.info
+
+curl -s -X POST http://127.0.0.1:9000 -H 'Content-Type: application/json'   --data-raw '{ "jsonrpc":"2.0", "method":"sui_getTotalTransactionNumber","id":1}' | jq 
+
+curl -s -X POST https://fullnode.testnet.sui.io:443 --header 'Content-Type: application/json' --data-raw '{ "jsonrpc":"2.0", "method":"sui_getTotalTransactionNumber","id":1}' | jq 
+
+Check sui node status
+service suid status
+
+Check sui node logs
+journalctl -u suid -f -o cat
+
+Stop sui node
+sudo systemctl stop suid
+
+Start sui node
+sudo systemctl start suid
+
+Retart sui node
+sudo systemctl restart suid
+
+Delete sui node
+sudo systemctl stop suid
+sudo systemctl disable suid
+sudo rm -rf $HOME/sui_node
+sudo rm /etc/systemd/system/suid.service
+
+
+clone and install scripts
+wget -q -O sui_testnet_update.sh https://raw.githubusercontent.com/Contribution-DAO/sui-node-setup/main/sui_testnet_update.sh && chmod +x sui_testnet_update.sh && sudo /bin/bash sui_testnet_update.sh
