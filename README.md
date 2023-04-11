@@ -4,5 +4,5 @@ Sui Node Requirements
  10 CPUs
  32GB RAM
  1000GB Storage
-🔲Port 9000, 9184
+Port 9000, 9184
  Need Super user or root for run this script.
